@@ -1,0 +1,23 @@
+# Target directories (Maven)
+**/target/
+
+# Build/output directories (IntelliJ, Eclipse, standard java bin)
+**/out/
+**/bin/
+.metadata/
+.settings/
+.classpath
+.project
+
+# IDE specific files
+.idea/
+*.iml
+*.iws
+.vscode/
+
+# Log files
+*.log
+**/logs/
+
+# Compiled class files
+*.class
