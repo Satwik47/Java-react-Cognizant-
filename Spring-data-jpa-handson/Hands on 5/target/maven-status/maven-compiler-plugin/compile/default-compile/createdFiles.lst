@@ -1,0 +1,3 @@
+com\example\countryservice\model\Country.class
+com\example\countryservice\CountryServiceApplication.class
+com\example\countryservice\repository\CountryRepository.class

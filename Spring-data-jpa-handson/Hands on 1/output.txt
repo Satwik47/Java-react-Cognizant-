@@ -1,0 +1,79 @@
+================================================================================
+SPRING DATA JPA - HANDS ON 1 - SAMPLE OUTPUT
+================================================================================
+
+When you run the OrmLearnApplication.java, you should see output similar to the
+following in your console:
+
+================================================================================
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_|\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.0.RELEASE)
+
+2020-06-20 14:30:45.123 main INFO  org.springframework.boot.StartupInfoLogger        : Starting OrmLearnApplication v0.0.1-SNAPSHOT on LAPTOP-SATWIK with PID 12345 (C:\path\to\orm-learn\target\classes started by user in C:\path\to\orm-learn)
+2020-06-20 14:30:45.128 main INFO  org.springframework.boot.StartupInfoLogger        : No active profile set, falling back to default profiles: [default]
+2020-06-20 14:30:45.456 main INFO  org.springframework.context.support.AbstractApplicationContext        : Refreshing org.springframework.context.support.AnnotationConfigApplicationContext@123456789
+
+[HikariPool-1] Starting...
+[HikariPool-1] HikariPool-1 - Starting...
+[HikariPool-1] HikariPool-1 - Start completed.
+
+2020-06-20 14:30:46.234 main INFO  org.hibernate.dialect.Dialect        : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2020-06-20 14:30:46.345 main INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean        : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-06-20 14:30:46.567 main INFO  org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryConfiguration        : Tomcat initialized with port(s): 8080 (http)
+2020-06-20 14:30:46.678 main INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer        : Tomcat started on port(s): 8080 (http) with context path ''
+2020-06-20 14:30:46.789 main INFO  org.springframework.boot.StartupInfoLogger        : Started OrmLearnApplication in 2.345 seconds (JVM running for 3.456)
+2020-06-20 14:30:46.890 main INFO  com.cognizant.ormlearn.OrmLearnApplication        : Inside main
+2020-06-20 14:30:46.901 main INFO  com.cognizant.ormlearn.service.CountryService        : Start
+
+2020-06-20 14:30:46.912 main DEBUG org.hibernate.SQL        : 
+    select
+        country0_.co_code as co_code1_0_,
+        country0_.co_name as co_name2_0_
+    from
+        country country0_
+
+2020-06-20 14:30:46.923 main TRACE org.hibernate.type.descriptor.sql.BasicExtractor        : found [IN] as column [co_code]
+2020-06-20 14:30:46.924 main TRACE org.hibernate.type.descriptor.sql.BasicExtractor        : found [India] as column [co_name]
+2020-06-20 14:30:46.925 main TRACE org.hibernate.type.descriptor.sql.BasicExtractor        : found [US] as column [co_code]
+2020-06-20 14:30:46.926 main TRACE org.hibernate.type.descriptor.sql.BasicExtractor        : found [United States of America] as column [co_name]
+
+2020-06-20 14:30:46.934 main DEBUG com.cognizant.ormlearn.OrmLearnApplication        : countries=[Country [code=IN, name=India], Country [code=US, name=United States of America]]
+2020-06-20 14:30:46.945 main INFO  com.cognizant.ormlearn.service.CountryService        : End
+
+================================================================================
+
+KEY POINTS IN THE OUTPUT:
+
+1. Spring Boot Initialization:
+   - Application context is created
+   - HikariCP connection pool is initialized
+   - Hibernate dialect is configured for MySQL5
+   - JPA EntityManagerFactory is initialized
+   - Tomcat server starts on port 8080
+
+2. Application Execution:
+   - "Inside main" log appears (from OrmLearnApplication.main())
+   - "Start" log appears (from testGetAllCountries())
+
+3. Hibernate SQL Execution:
+   - The SELECT query is displayed showing the actual SQL executed
+   - Trace logs show the values being extracted from the database
+
+4. Test Method Results:
+   - Debug log shows the countries list retrieved: 
+     [Country [code=IN, name=India], Country [code=US, name=United States of America]]
+   - "End" log appears
+
+5. No Errors:
+   - The application should complete successfully without any exceptions
+   - Connection to MySQL database is successful
+   - Data retrieval from the country table is successful
+
+================================================================================
+

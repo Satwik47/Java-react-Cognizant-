@@ -1,0 +1,5 @@
+com\example\employeesystem\entity\Employee.class
+com\example\employeesystem\EmployeeManagementSystemApplication.class
+com\example\employeesystem\entity\Department.class
+com\example\employeesystem\repository\DepartmentRepository.class
+com\example\employeesystem\repository\EmployeeRepository.class

@@ -1,0 +1,8 @@
+Saved Employee IDs: 1, 2
+Employees (after insert):
+Employee{id=1, firstName='Paul', lastName='Wall', salary=3000}
+Employee{id=2, firstName='Allen', lastName='Wong', salary=3500}
+Updated employee id=1 salary=4000
+Deleted employee id=2
+Employees (final):
+Employee{id=1, firstName='Paul', lastName='Wall', salary=4000}

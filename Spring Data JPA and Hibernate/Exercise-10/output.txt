@@ -1,0 +1,13 @@
+Starting Employee Management System - Hibernate Specific Features
+Inserting 25 employees in batches of 10...
+Flushed and cleared after 10 inserts
+Flushed and cleared after 20 inserts
+Inserted 25 employees.
+Updated salary for Employee id=1 to 75000.0
+All employees:
+Employee{id=1, name='Emp 1', department='Dept 2', salary=75000.0}
+Employee{id=2, name='Emp 2', department='Dept 3', salary=52000.0}
+Employee{id=3, name='Emp 3', department='Dept 4', salary=53000.0}
+... (list truncated for brevity)
+Deleted employee id=2
+Completed.

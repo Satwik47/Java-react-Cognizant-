@@ -1,0 +1,4 @@
+Country added: XYZ - Test Country
+Country deleted with code: XYZ
+Country exists after deletion: false
+Test PASSED: Country successfully deleted

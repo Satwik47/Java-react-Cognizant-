@@ -1,0 +1,61 @@
+Hands-on 8: Update a Country Based on Code - Expected Outputs
+
+====================================================================
+
+CONSOLE OUTPUT:
+====================================================================
+
+----- Before Update -----
+Country [code=IN, name=India]
+
+Hibernate:
+select
+c1_0.co_code,
+c1_0.co_name
+from country c1_0
+where c1_0.co_code=?
+
+Hibernate:
+update
+country
+set
+co_name=?
+where
+co_code=?
+
+----- After Update -----
+Country [code=IN, name=Republic of India]
+
+
+====================================================================
+
+DATABASE VERIFICATION (MySQL):
+====================================================================
+
+Query: SELECT * FROM country;
+
+Before Update:
+co_code    co_name
+IN         India
+US         United States
+
+After Update:
+co_code    co_name
+IN         Republic of India
+US         United States
+
+
+====================================================================
+
+VERIFICATION:
+====================================================================
+
+The co_name value has been successfully updated from "India" to "Republic of India" 
+for the country with code "IN".
+
+The updateCountry() method in CountryService successfully:
+1. Found the country by code "IN"
+2. Updated the country name to "Republic of India"
+3. Saved the changes to the database using countryRepository.save()
+
+Hibernate generated the UPDATE SQL statement to persist the changes.
