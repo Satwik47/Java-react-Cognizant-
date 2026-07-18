@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <message>This is content from main branch</message>
-    <author>User2</author>
+    <message>This is content from both main and GitWork branches - Merged</message>
+    <author>User1 and User2</author>
     <date>2026-07-18</date>
-    <branch>main</branch>
+    <branch>main and GitWork merged</branch>
 </root>
