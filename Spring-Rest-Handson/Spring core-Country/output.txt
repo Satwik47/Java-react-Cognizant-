@@ -1,0 +1,14 @@
+Expected Console Output
+======================
+
+INFO  SpringLearnApplication : START
+
+DEBUG Country : Inside Country Constructor.
+
+DEBUG Country : Inside setCode()
+
+DEBUG Country : Inside setName()
+
+DEBUG SpringLearnApplication : Country : Country [code=IN, name=India]
+
+INFO  SpringLearnApplication : END

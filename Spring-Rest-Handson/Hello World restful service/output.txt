@@ -1,0 +1,159 @@
+
+================================================================================
+CONFIGURATION (application.properties)
+================================================================================
+server.port=8083
+
+logging.level.com.cognizant.springlearn=DEBUG
+
+================================================================================
+CONSOLE OUTPUT - APPLICATION STARTUP
+================================================================================
+Tomcat started on port(s): 8083 (http)
+Started SpringLearnApplication in 2.5 seconds
+
+================================================================================
+CONSOLE OUTPUT - WHEN /hello ENDPOINT IS ACCESSED
+================================================================================
+INFO  HelloController : START
+INFO  HelloController : END
+
+================================================================================
+BROWSER OUTPUT
+================================================================================
+URL: http://localhost:8083/hello
+
+Response:
+Hello World!!
+
+================================================================================
+POSTMAN OUTPUT
+================================================================================
+Method: GET
+URL: http://localhost:8083/hello
+
+Response Body:
+Hello World!!
+
+Console Logs:
+INFO  HelloController : START
+INFO  HelloController : END
+
+================================================================================
+REQUEST DETAILS
+================================================================================
+Field           Value
+------------------------
+Method          GET
+URL             http://localhost:8083/hello
+Controller      HelloController
+Method          sayHello()
+Return Type     String
+Response        Hello World!!
+
+================================================================================
+HOW SPRING HANDLES THE REQUEST
+================================================================================
+Browser/Postman
+       │
+       ▼
+GET /hello
+       │
+       ▼
+DispatcherServlet
+       │
+       ▼
+HelloController
+       │
+       ▼
+sayHello()
+       │
+       ▼
+return "Hello World!!"
+       │
+       ▼
+Browser/Postman
+
+================================================================================
+ANNOTATION EXPLANATIONS
+================================================================================
+@RestController:
+- Marks the class as a REST Controller
+- Combines @Controller and @ResponseBody
+- The returned string is sent directly as the HTTP response body
+
+@GetMapping("/hello"):
+- Maps the HTTP GET request for /hello to the sayHello() method
+
+================================================================================
+METHOD EXECUTION FLOW
+================================================================================
+@GetMapping("/hello")
+public String sayHello() {
+
+    LOGGER.info("START");        // Step 1: Log START
+
+    String message = "Hello World!!";  // Step 2: Create String
+
+    LOGGER.info("END");          // Step 3: Log END
+
+    return message;              // Step 4: Return response
+}
+
+Execution order:
+1. Request received
+2. START log
+3. Create String
+4. END log
+5. Return response
+
+================================================================================
+HTTP HEADERS (BROWSER DEVELOPER TOOLS)
+================================================================================
+To view:
+- Press F12
+- Go to Network tab
+- Refresh http://localhost:8083/hello
+- Select the hello request
+
+Typical response headers:
+Header                          Value
+----------------------------------------
+Status Code                     200 OK
+Content-Type                    text/plain;charset=UTF-8
+Content-Length                  13
+Connection                      keep-alive
+Date                            Current server date/time
+
+================================================================================
+HTTP HEADERS (POSTMAN)
+================================================================================
+After clicking Send, open the Headers tab:
+
+Header                          Value
+----------------------------------------
+Content-Type                    text/plain;charset=UTF-8
+Content-Length                  13
+Date                            Mon, 06 Jul 2026 ...
+Connection                      keep-alive
+
+================================================================================
+EXPECTED OUTPUT SUMMARY
+================================================================================
+
+Console:
+--------
+Tomcat started on port(s): 8083 (http)
+Started SpringLearnApplication
+INFO HelloController : START
+INFO HelloController : END
+
+Browser:
+--------
+Hello World!!
+
+Postman:
+--------
+Hello World!!
+
+================================================================================

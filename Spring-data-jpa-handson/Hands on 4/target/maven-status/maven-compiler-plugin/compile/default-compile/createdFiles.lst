@@ -1,5 +1,0 @@
-com\example\handson4\HandsOn4Application.class
-com\example\handson4\entity\Employee.class
-com\example\handson4\repository\EmployeeRepository.class
-com\example\handson4\DataLoader.class
-com\example\handson4\service\EmployeeService.class

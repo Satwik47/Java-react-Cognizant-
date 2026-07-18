@@ -1,6 +1,0 @@
-com\example\demo\Department.class
-com\example\demo\EmployeeRepository.class
-com\example\demo\projections\EmployeeWithDeptProjection.class
-com\example\demo\projections\DepartmentName.class
-com\example\demo\Employee.class
-com\example\demo\projections\EmployeeNameProjection.class

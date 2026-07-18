@@ -1,0 +1,252 @@
+GIT HANDS-ON LAB: MERGE CONFLICT RESOLUTION
+============================================
+
+STEP 1: Verify if master is in clean state
+--------------------------------------------
+Command: git status
+Output:
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+STEP 2: Create a branch "GitWork". Add a file "hello.xml"
+---------------------------------------------------------
+Command: git checkout -b GitWork
+Output:
+Switched to a new branch 'GitWork'
+
+Command: [Created hello.xml with initial content]
+Content:
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <message>This is content from GitWork branch</message>
+    <author>User1</author>
+    <date>2026-07-18</date>
+</root>
+
+STEP 3: Update the content of "hello.xml" and observe the status
+-----------------------------------------------------------------
+Command: [Updated hello.xml with modified content]
+Content:
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <message>This is content from GitWork branch - Modified</message>
+    <author>User1</author>
+    <date>2026-07-18</date>
+    <branch>GitWork</branch>
+</root>
+
+Command: git status
+Output:
+On branch GitWork
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        hello.xml
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+STEP 4: Commit the changes to reflect in the branch
+-----------------------------------------------------
+Command: git add hello.xml
+Command: git commit -m "Added hello.xml in GitWork branch"
+Output:
+warning: in the working copy of 'hello.xml', LF will be replaced by CRLF the next time Git touches it
+[GitWork 3d9d62a] Added hello.xml in GitWork branch
+ 1 file changed, 7 insertions(+)
+ create mode 100644 hello.xml
+
+STEP 5: Switch to master
+--------------------------
+Command: git checkout main
+Output:
+Switched to branch 'main'
+
+STEP 6: Add a file "hello.xml" to the master and add some different content than previous
+-----------------------------------------------------------------------------------------
+Command: [Created hello.xml with different content in main branch]
+Content:
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <message>This is content from main branch</message>
+    <author>User2</author>
+    <date>2026-07-18</date>
+    <branch>main</branch>
+</root>
+
+STEP 7: Commit the changes to the master
+-----------------------------------------
+Command: git add hello.xml
+Command: git commit -m "Added hello.xml in main branch with different content"
+Output:
+warning: in the working copy of 'hello.xml', LF will be replaced by CRLF the next time Git touches it
+[main b62a1da] Added hello.xml in main branch with different content
+ 1 file changed, 7 insertions(+)
+ create mode 100644 hello.xml
+
+STEP 8: Observe the log by executing "git log --oneline --graph --decorate --all"
+----------------------------------------------------------------------------------
+Command: git log --oneline --graph --decorate --all
+Output:
+* b62a1da (HEAD -> main) Added hello.xml in main branch with different content
+| * 3d9d62a (GitWork) Added hello.xml in GitWork branch
+|/
+* 12be0b5 Added sample file in GitNewBranch
+* 50b5eae (origin/main, origin/HEAD) Add hands-on exercises for design patterns, JUnit testing, logging, PL/SQL, and .gitignore config
+* 09fd809 Initial commit: Add WEEK-2 folder with Spring Data JPA, Hibernate, and Spring Core projects
+
+STEP 9: Check the differences with Git diff tool
+-------------------------------------------------
+Command: git diff main GitWork
+Output:
+diff --git a/hello.xml b/hello.xml
+index d412b3e..39a388b 100644
+--- a/hello.xml
++++ b/hello.xml
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <root>
+-    <message>This is content from main branch</message>
+-    <author>User2</author>
++    <message>This is content from GitWork branch - Modified</message>
++    <author>User1</author>
+     <date>2026-07-18</date>
+-    <branch>main</branch>
++    <branch>GitWork</branch>
+
+STEP 10: For better visualization, use P4Merge tool to list out all the differences between master and branch
+----------------------------------------------------------------------------------------------------------------
+Note: P4Merge tool configuration would be set up using git config commands. For this lab, we proceed with standard git diff.
+
+STEP 11: Merge the branch to the master
+---------------------------------------
+Command: git merge GitWork
+Output:
+Auto-merging hello.xml
+CONFLICT (add/add): Merge conflict in hello.xml
+Automatic merge failed; fix conflicts and then commit the result.
+
+STEP 12: Observe the git markup
+--------------------------------
+Command: git status
+Output:
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both added:      hello.xml
+
+no changes added to commit (use "git add" to track)
+
+File content with conflict markers:
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<<<<<<< HEAD
+    <message>This is content from main branch</message>
+    <author>User2</author>
+    <date>2026-07-18</date>
+    <branch>main</branch>
+=======
+    <message>This is content from GitWork branch - Modified</message>
+    <author>User1</author>
+    <date>2026-07-18</date>
+    <branch>GitWork</branch>
+>>>>>>> GitWork
+</root>
+
+STEP 13: Use 3-way merge tool to resolve the conflict
+------------------------------------------------------
+Command: [Manually edited hello.xml to resolve conflict]
+Resolved content:
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <message>This is content from both main and GitWork branches - Merged</message>
+    <author>User1 and User2</author>
+    <date>2026-07-18</date>
+    <branch>main and GitWork merged</branch>
+</root>
+
+STEP 14: Commit the changes to the master, once done with conflict
+-------------------------------------------------------------------
+Command: git add hello.xml
+Command: git commit -m "Resolved merge conflict between main and GitWork branches"
+Output:
+[main b33ee7c] Resolved merge conflict between main and GitWork branches
+
+STEP 15: Observe the git status and add backup file to the .gitignore file
+----------------------------------------------------------------------------
+Command: git status
+Output:
+On branch main
+nothing to commit, working tree clean
+
+Command: [Created .gitignore file]
+Content:
+# Backup files
+*.bak
+*.backup
+*.tmp
+*~
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+STEP 16: Commit the changes to the .gitignore
+----------------------------------------------
+Command: git add .gitignore
+Command: git commit -m "Added .gitignore file for backup files"
+Output:
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+[main 7523bbc] Added .gitignore file for backup files
+ 1 file changed, 13 insertions(+)
+ create mode 100644 .gitignore
+
+STEP 17: List out all the available branches
+--------------------------------------------
+Command: git branch
+Output:
+* main
+
+Command: git branch -a
+Output:
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+
+STEP 18: Delete the branch, which merged to master
+---------------------------------------------------
+Command: git branch -d GitWork
+Output:
+Deleted branch GitWork (was 3d9d62a)
+
+STEP 19: Observe the log by executing "git log --oneline --graph --decorate"
+-----------------------------------------------------------------------------
+Command: git log --oneline --graph --decorate
+Output:
+* 7523bbc (HEAD -> main) Added .gitignore file for backup files
+*   b33ee7c Resolved merge conflict between main and GitWork branches
+|\
+| * 3d9d62a Added hello.xml in GitWork branch
+* | b62a1da Added hello.xml in main branch with different content
+|/
+* 12be0b5 Added sample file in GitNewBranch
+* 50b5eae (origin/main, origin/HEAD) Add hands-on exercises for design patterns, JUnit testing, logging, PL/SQL, and .gitignore config
+* 09fd809 Initial commit: Add WEEK-2 folder with Spring Data JPA, Hibernate, and Spring Core projects
+
+SUMMARY
+=======
+Successfully completed Git merge conflict resolution hands-on lab:
+- Created GitWork branch and added hello.xml file
+- Modified content in both branches to create conflict
+- Merged branches and resolved conflict using 3-way merge
+- Added .gitignore file for backup files
+- Deleted merged branch
+- Verified final git log showing merge history

@@ -1,0 +1,109 @@
+GIT HANDS-ON LAB OUTPUT
+========================
+
+Branching and Merging Exercise
+-------------------------------
+
+COMMAND: git branch GitNewBranch
+OUTPUT: 
+  GitNewBranch
+
+COMMAND: git branch -a
+OUTPUT:
+  GitNewBranch
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+
+COMMAND: git checkout GitNewBranch
+OUTPUT:
+Switched to branch 'GitNewBranch'
+
+COMMAND: echo "This is my first branch file." > sample.txt
+OUTPUT:
+txt
+
+COMMAND: git add sample.txt
+OUTPUT:
+mple.txt
+
+COMMAND: git commit -m "Added sample file in GitNewBranch"
+OUTPUT:
+[GitNewBranch 12be0b5] Added sample file in GitNewBranch
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 GIT Handson/GIT Hands on-3/sample.txt
+
+COMMAND: git status
+OUTPUT:
+On branch GitNewBranch
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../GIT Hands on-1/
+        ../GIT Hands on-2/
+        ../../Spring-Rest-Handson/
+        ../../jwt-authentication/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+COMMAND: git checkout master
+OUTPUT:
+error: pathspec 'master' did not match any file(s) known to git
+
+COMMAND: git checkout main
+OUTPUT:
+Switched to branch 'main'
+
+COMMAND: git diff main GitNewBranch
+OUTPUT:
+diff --git a/GIT Handson/GIT Hands on-3/sample.txt b/GIT Handson/GIT Hands on-3/sample.txt
+new file mode 100644
+index 0000000..201fc2a
+Binary files /dev/null and b/GIT Handson/GIT Hands on-3/sample.txt differ
+
+COMMAND: git difftool main GitNewBranch
+OUTPUT:
+[Command was canceled by user - P4Merge tool would open here]
+
+COMMAND: git merge GitNewBranch
+OUTPUT:
+Updating 50b5eae..12be0b5
+Fast-forward
+ GIT Handson/GIT Hands on-3/sample.txt | Bin 0 -> 64 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 GIT Handson/GIT Hands on-3/sample.txt
+
+COMMAND: git log --oneline --graph --decorate
+OUTPUT:
+* 12be0b5 (HEAD -> main, GitNewBranch) Added sample file in GitNewBranch
+* 50b5eae (origin/main, origin/HEAD) Add hands-on exercises for design patterns, JUnit testing, logging, PL/SQL, and .gitignore config
+* 09fd809 Initial commit: Add WEEK-2 folder with Spring Data JPA, Hibernate, and Spring Core projects
+
+COMMAND: git branch -d GitNewBranch
+OUTPUT:
+Deleted branch GitNewBranch (was 12be0b5)
+
+COMMAND: git status
+OUTPUT:
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        ../GIT Hands on-1/
+        ../GIT Hands on-2/
+        ../../Spring-Rest-Handson/
+        ../../jwt-authentication/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+SUMMARY
+=======
+- Successfully created GitNewBranch
+- Added sample.txt file with content in the branch
+- Committed changes to the branch
+- Switched to main branch
+- Viewed differences between branches
+- Merged GitNewBranch into main (fast-forward merge)
+- Observed commit history with graph visualization
+- Deleted GitNewBranch after successful merge
+- Final status shows clean working directory (only untracked folders outside current directory)
+
+Lab completed successfully!

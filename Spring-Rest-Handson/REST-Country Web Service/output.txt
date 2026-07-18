@@ -1,0 +1,87 @@
+REST Country Web Service - Expected Outputs
+=============================================
+
+1. BROWSER OUTPUT
+-----------------
+URL: http://localhost:8083/country
+
+Expected JSON Response:
+{
+  "code": "IN",
+  "name": "India"
+}
+
+
+2. POSTMAN OUTPUT
+------------------
+Method: GET
+URL: http://localhost:8083/country
+
+Expected Response:
+{
+  "code": "IN",
+  "name": "India"
+}
+
+HTTP Response Headers:
+----------------------
+Header              Value
+Status              200 OK
+Content-Type        application/json
+Content-Length      (varies)
+Date                Current server time
+Connection          keep-alive
+
+
+3. CONSOLE OUTPUT
+-----------------
+Tomcat started on port(s): 8083 (http)
+Started SpringLearnApplication
+
+INFO  CountryController : START
+INFO  CountryController : END
+
+If DEBUG logging is enabled in Country class:
+DEBUG Country : Inside Country Constructor.
+DEBUG Country : Inside setCode()
+DEBUG Country : Inside setName()
+
+
+4. REQUEST FLOW
+---------------
+Browser/Postman
+       │
+       ▼
+GET /country
+       │
+       ▼
+DispatcherServlet
+       │
+       ▼
+CountryController
+       │
+       ▼
+getCountryIndia()
+       │
+       ▼
+Load country.xml
+       │
+       ▼
+Create Country Bean
+       │
+       ▼
+Return Country Object
+       │
+       ▼
+Spring Boot converts Object to JSON
+       │
+       ▼
+Browser/Postman
+
+
+5. ADDITIONAL ENDPOINT
+----------------------
+URL: http://localhost:8083/hello
+
+Expected Response:
+Hello World!
